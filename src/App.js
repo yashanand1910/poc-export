@@ -1,23 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import { useRef, useState } from 'react';
+import jsPDF from 'jspdf';
+import Document from './Document';
+import Toolbar from './Toolbar';
 
 function App() {
+  const [documentSettings] = useState({
+    count: 10
+  });
+
+  const documentRef = useRef(null);
+
+  const handleGeneratePdf = () => {
+    const doc = new jsPDF({
+      format: 'a4',
+      unit: 'px',
+    });
+
+    // Adding the fonts.
+    doc.setFont('Inter-Regular', 'normal');
+
+    doc.html(documentRef.current, {
+      callback(doc) {
+        doc.save('document');
+      },
+    });
+  };
+
+  const styles = {
+    page: {
+      display: 'flex',
+      flexDirection: 'row'
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={styles.page}>
+      <Toolbar genPDF={handleGeneratePdf} />
+      <div ref={documentRef}>
+        <Document settings={documentSettings} />
+      </div>
     </div>
   );
 }
