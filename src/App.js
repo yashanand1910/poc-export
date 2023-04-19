@@ -1,36 +1,40 @@
-import { useRef, useState } from 'react';
-import jsPDF from 'jspdf';
-import Document from './Document';
-import Toolbar from './Toolbar';
+import { useRef, useState } from "react";
+import jsPDF from "jspdf";
+import Document from "./Document";
+import Toolbar from "./Toolbar";
 
 function App() {
+  const page = {
+    a4: 1 / 1.414,
+  };
+
   const [documentSettings] = useState({
-    count: 10
+    count: 9,
+    aspectRatio: page.a4,
   });
 
   const documentRef = useRef(null);
 
   const handleGeneratePdf = () => {
     const doc = new jsPDF({
-      format: 'a4',
-      unit: 'px',
+      unit: "cm",
     });
 
     // Adding the fonts.
-    doc.setFont('Inter-Regular', 'normal');
+    doc.setFont("Inter-Regular", "normal");
 
     doc.html(documentRef.current, {
       callback(doc) {
-        doc.save('document');
+        doc.save("document");
       },
     });
   };
 
   const styles = {
     page: {
-      display: 'flex',
-      flexDirection: 'row'
-    }
+      display: "grid",
+      gridTemplateColumns: "250px auto",
+    },
   };
 
   return (
