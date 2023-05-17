@@ -1,10 +1,8 @@
 const Document = (props) => {
   const styles = {
     document: {
-      marginLeft: "5rem",
-      marginRight: "5rem",
       padding: "20pt",
-      backgroundColor: "white",
+      backgroundColor: "#EFEFEF",
       boxShadow: "0 6px 40px rgba(0,0,0,0.2)",
       display: "grid",
       gridTemplateColumns: "repeat(4, 1fr)",
@@ -19,6 +17,7 @@ const Document = (props) => {
 
       img: {
         width: "100%",
+        pageBreakBefore: "always"
       },
     },
   };
@@ -45,7 +44,7 @@ const Document = (props) => {
     return items;
   };
 
-  return <div style={styles.document}>{items()}</div>;
+  return <div style={styles.document} ref={props.documentRef}>{items()}</div>;
 };
 
 export default Document;

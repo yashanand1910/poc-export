@@ -9,7 +9,7 @@ function App() {
   };
 
   const [documentSettings] = useState({
-    count: 9,
+    count: 19,
     aspectRatio: page.a4,
   });
 
@@ -17,16 +17,21 @@ function App() {
 
   const handleGeneratePdf = () => {
     const doc = new jsPDF({
-      unit: "cm",
+      orientation: "l",
+      unit: "px",
+      format: "a4"
     });
 
     // Adding the fonts.
-    doc.setFont("Inter-Regular", "normal");
+    doc.setFont("Roboto", "normal");
 
     doc.html(documentRef.current, {
-      callback(doc) {
+      callback: function (doc) {
         doc.save("document");
       },
+      autoPaging: 'text',
+      width: 630,
+      windowWidth: 2000
     });
   };
 
@@ -40,8 +45,8 @@ function App() {
   return (
     <div style={styles.page}>
       <Toolbar genPDF={handleGeneratePdf} />
-      <div ref={documentRef}>
-        <Document settings={documentSettings} />
+      <div>
+        <Document settings={documentSettings} documentRef={documentRef} />
       </div>
     </div>
   );
