@@ -1,16 +1,42 @@
 import { useRef, useState } from "react";
 import jsPDF from "jspdf";
-import Document from "./Document";
+import PreviewContainer from "./Preview/PreviewContainer";
 import Toolbar from "./Toolbar";
 
 function App() {
-  const page = {
-    a4: 1 / 1.414,
-  };
 
-  const [documentSettings] = useState({
-    count: 19,
-    aspectRatio: page.a4,
+  const [data] = useState({
+    productList: [
+      {name: "Abc"},
+      {name: "Abc"},
+      {name: "Abc"},
+      {name: "Abc"},
+      {name: "Abc"},
+      {name: "Abc"},
+      {name: "Abc"},
+      {name: "Abc"},
+      {name: "Abc"},
+      {name: "Abc"},
+      {name: "Abc"},
+      {name: "Abc"},
+      {name: "Abc"},
+      {name: "Abc"},
+      {name: "Abc"},
+      {name: "Abc"},
+      {name: "Abc"},
+      {name: "Abc"},
+      {name: "Abc"},
+      {name: "Abc"},
+      {name: "Abc"},
+      {name: "Abc"},
+      {name: "Abc"},
+      {name: "Abc"},
+      {name: "Abc"},
+      {name: "Abc"},
+      {name: "Abc"},
+      {name: "Abc"},
+    ],
+    orientation: [2, 3]
   });
 
   const documentRef = useRef(null);
@@ -18,20 +44,19 @@ function App() {
   const handleGeneratePdf = () => {
     const doc = new jsPDF({
       orientation: "l",
-      unit: "px",
+      unit: "cm",
       format: "a4"
     });
 
     // Adding the fonts.
     doc.setFont("Roboto", "normal");
-
     doc.html(documentRef.current, {
       callback: function (doc) {
         doc.save("document");
       },
       autoPaging: 'text',
-      width: 630,
-      windowWidth: 2000
+      width: 29.7,
+      windowWidth: Math.floor((window.innerWidth * 75 / 100))
     });
   };
 
@@ -39,15 +64,14 @@ function App() {
     page: {
       display: "grid",
       gridTemplateColumns: "250px auto",
+      height: "100vh"
     },
   };
 
   return (
     <div style={styles.page}>
       <Toolbar genPDF={handleGeneratePdf} />
-      <div>
-        <Document settings={documentSettings} documentRef={documentRef} />
-      </div>
+      <PreviewContainer data={data} documentRef={documentRef} />
     </div>
   );
 }
