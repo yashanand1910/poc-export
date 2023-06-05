@@ -8,12 +8,14 @@ const LinesheetItem = (props) => {
       background: '#98e9d1',
       display: 'flex',
       flexDirection: 'column',
-      gap: "1vw"
+      gap: "1vw",
+      overflow: "clip"
     },
     imageContainer: {
       flexShrink: 1,
       flexGrow: 1,
-      alignSelf: "center"
+      alignSelf: "center",
+      maxHeight: "50%"
     },
     attributeContainer: {
       flexShrink: 0,

@@ -10,7 +10,7 @@ const PreviewContent = (props) => {
       width: `calc(0.98 * ${width})`,
       height: `calc(0.85 * ${width} / 1.4142857)`,
       display: 'grid',
-      gridTemplateRows: `repeat(${orientation[0]}, 1fr)`,
+      gridTemplateRows: `repeat(${orientation[0]}, minmax(0, 1fr))`,
       gridTemplateColumns: `repeat(${orientation[1]}, 1fr)`,
       columnGap: 15,
       rowGap: 15,
