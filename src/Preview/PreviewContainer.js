@@ -6,18 +6,22 @@ const PreviewContainer = (props) => {
 
   const styles = {
     wrapper: {
+      flex: "1",
+      minWidth: "1128px",
       width: '100%',
       height: '100%',
       display: 'flex',
       justifyContent: 'center',
       overflowY: "auto",
+      paddingLeft: "20px",
+      paddingRight: "20px"
     },
 
     container: {
-      width: '75vw',
+      width: 'max(75vw, calc(1128px - 40px))',
       height: 'auto',
       backgroundColor: '#EFD9B3',
-      fontSize: 'calc(9/12*75vw/70.166)',
+      fontSize: 'calc(9/12*max(75vw, 1128px - 40px)/70.166)',
       fontFamily: "'Roboto', sans-serif"
     }
   };
@@ -34,7 +38,7 @@ const PreviewContainer = (props) => {
   }
 
 const previewContext = {
-  width: "75vw", orientation, totalPages: pageBlocks.length
+  width: "max(75vw, 1128px - 40px)", orientation, totalPages: pageBlocks.length
 }
 
   return <PreviewContainerContext.Provider value={previewContext}>

@@ -1,6 +1,7 @@
 const Toolbar = (props) => {
   const styles = {
     toolbar: {
+      flex: "0 0 275px",
       height: "auto",
       backgroundColor: "white",
       boxShadow: "0 6px 40px rgba(0,0,0,0.2)",

@@ -36,7 +36,7 @@ function App() {
       {name: "Abc"},
       {name: "Abc"},
     ],
-    orientation: [2, 3]
+    orientation: [5, 4]
   });
 
   const documentRef = useRef(null);
@@ -62,9 +62,10 @@ function App() {
 
   const styles = {
     page: {
-      display: "grid",
-      gridTemplateColumns: "250px auto",
-      height: "100vh"
+      display: "flex",
+      flexFlow: "row nowrap",
+      height: "100vh",
+      overflowX: "auto",
     },
   };
 
